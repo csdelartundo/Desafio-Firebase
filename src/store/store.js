@@ -41,7 +41,7 @@ const store = createStore({
         async addUsuario({ commit }, nuevoUsuario) {
             const db = getFirestore(firebaseApp);
             const usuariosRef = collection(db, "usuarios");
-            const docRef = await addDoc(usuariosRef, nuevoUsuario); // nombre, email, telefono
+            const docRef = await addDoc(usuariosRef, nuevoUsuario); 
             commit("addUsuario", { id: docRef.id, ...nuevoUsuario });
         },
         async deleteUsuario({ commit }, usuarioId) {

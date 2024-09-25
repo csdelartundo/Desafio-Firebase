@@ -2,7 +2,9 @@
     <div>
         <ul>
             <li v-for="usuario in usuarios" :key="usuario.id">
-                {{ usuario.nombre }}
+                <p>Nombre: {{ usuario.nombre }}</p>
+                <p>Email: {{ usuario.email }}</p>
+                <p>Teléfono: {{ usuario.telefono }}</p>
                 <button @click="deleteUsuario(usuario.id)">Eliminar</button>
             </li>
         </ul>

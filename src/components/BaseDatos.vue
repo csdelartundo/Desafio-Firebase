@@ -15,7 +15,7 @@ import { mapActions } from 'vuex';
 export default {
     data() {
         return {
-            nuevoUsuario: '',
+            nuevoNombre: '',
             nuevoEmail: '',
             nuevoTelefono: ''
         };
@@ -23,14 +23,14 @@ export default {
     methods: {
         ...mapActions(['addUsuario']),
         async submitUsuario() {  // Renombra este método para evitar la recursión
-            if (this.nuevoUsuario.trim() !== '' && this.nuevoEmail.trim() !== '' && this.nuevoTelefono.trim() !== '') {
+            if (this.nuevoNombre.trim() !== '' && this.nuevoEmail.trim() !== '' && this.nuevoTelefono.trim() !== '') {
                 const nuevoUsuario = {
                     nombre: this.nuevoNombre,
                     email: this.nuevoEmail,
                     telefono: this.nuevoTelefono,
                 }
                 await this.addUsuario(nuevoUsuario);  // Llama a la acción de Vuex
-                    this.nuevoNombre = '';  // Limpiar el input después de agregar el usuario
+                    this.nuevoNombre = '';  
                     this.nuevoEmail = '';
                     this.nuevoTelefono = '';
                 }
