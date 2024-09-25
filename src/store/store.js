@@ -35,14 +35,15 @@ const store = createStore({
                     id: doc.id,
                     ...doc.data(),
                 }));
+                console.log("Usuarios recibidos desde Firebase:", usuarios);
                 commit("setUsuarios", usuarios);
             });
         },
         async addUsuario({ commit }, nuevoUsuario) {
             const db = getFirestore(firebaseApp);
             const usuariosRef = collection(db, "usuarios");
-            const docRef = await addDoc(usuariosRef, nuevoUsuario); 
-            commit("addUsuario", { id: docRef.id, ...nuevoUsuario });
+                const docRef = await addDoc(usuariosRef, nuevoUsuario);
+                commit("addUsuario", { id: docRef.id, ...nuevoUsuario });
         },
         async deleteUsuario({ commit }, usuarioId) {
             const db = getFirestore(firebaseApp);
@@ -52,7 +53,7 @@ const store = createStore({
         },
     },
     getters: {
-        usuarios: state => state.usuarios,
+        usuarios: (state) => state.usuarios,
     },
 });
 

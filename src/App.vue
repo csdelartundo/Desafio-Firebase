@@ -5,5 +5,5 @@
 
 <script setup>
 import BaseDatos from './components/BaseDatos.vue'
-import UsuariosRegistrados from './components/UsuariosResgistrados.vue'
+import UsuariosRegistrados from './components/UsuariosRegistrados.vue'
 </script>

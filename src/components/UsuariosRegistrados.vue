@@ -22,7 +22,7 @@ export default {
         ...mapActions(['deleteUsuario'])
     },
     mounted() {
-        this.$store.dispatch('fetchUsuarios');
+            this.$store.dispatch('fetchUsuarios')
     }
 };
 </script>

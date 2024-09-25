@@ -22,7 +22,7 @@ export default {
     },
     methods: {
         ...mapActions(['addUsuario']),
-        async submitUsuario() {  // Renombra este método para evitar la recursión
+        async submitUsuario() { 
             if (this.nuevoNombre.trim() !== '' && this.nuevoEmail.trim() !== '' && this.nuevoTelefono.trim() !== '') {
                 const nuevoUsuario = {
                     nombre: this.nuevoNombre,
