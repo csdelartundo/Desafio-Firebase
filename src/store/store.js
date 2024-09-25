@@ -3,7 +3,7 @@ import {
     collection,
     getFirestore,
     onSnapshot,
-    addDoc,
+    setDoc,
     deleteDoc,
     doc,
 } from "firebase/firestore";
@@ -18,7 +18,10 @@ const store = createStore({
             state.usuarios = usuarios;
         },
         addUsuario(state, usuario) {
-            state.usuarios.push(usuario);
+            const existe = state.usuarios.some(u => u.id === usuario.id);
+            if (!existe) {
+                state.usuarios.push(usuario);
+            }
         },
         deleteUsuario(state, usuarioId) {
             state.usuarios = state.usuarios.filter(
@@ -42,7 +45,8 @@ const store = createStore({
         async addUsuario({ commit }, nuevoUsuario) {
             const db = getFirestore(firebaseApp);
             const usuariosRef = collection(db, "usuarios");
-                const docRef = await addDoc(usuariosRef, nuevoUsuario);
+            const docRef = doc(usuariosRef, nuevoUsuario.email);
+            await setDoc(docRef, nuevoUsuario)
                 commit("addUsuario", { id: docRef.id, ...nuevoUsuario });
         },
         async deleteUsuario({ commit }, usuarioId) {
