@@ -15,10 +15,7 @@ const store = createStore({
     },
     mutations: {
         setUsuarios(state, usuarios) {
-            state.usuarios = usuarios.filter(
-                (usuario, index, self) =>
-                    index === self.findIndex((u) => u.id === usuario.id)
-            );
+            state.usuarios = usuarios;
         },
         addUsuario(state, usuario) {
             state.usuarios.push(usuario);
@@ -41,11 +38,11 @@ const store = createStore({
                 commit("setUsuarios", usuarios);
             });
         },
-        async addUsuario({ commit }, nombre) {
+        async addUsuario({ commit }, nuevoUsuario) {
             const db = getFirestore(firebaseApp);
             const usuariosRef = collection(db, "usuarios");
-            await addDoc(usuariosRef, { nombre });
-            // No hagas el commit aquí, deja que Firestore maneje la actualización
+            const docRef = await addDoc(usuariosRef, nuevoUsuario); // nombre, email, telefono
+            commit("addUsuario", { id: docRef.id, ...nuevoUsuario });
         },
         async deleteUsuario({ commit }, usuarioId) {
             const db = getFirestore(firebaseApp);
@@ -55,7 +52,7 @@ const store = createStore({
         },
     },
     getters: {
-        usuarios: (state) => state.usuarios,
+        usuarios: state => state.usuarios,
     },
 });
 
